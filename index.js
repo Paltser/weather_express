@@ -43,6 +43,10 @@ app.all('/', function (req, res) {
     }
     if (req.method === 'POST') {
         city = req.body.cityname;
+        if (!city) {
+            res.render('index', {error: 'Sisesta Linna nimi'})
+            return
+        }
     }
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${key}`;
     getWeatherDataPromise(url)
